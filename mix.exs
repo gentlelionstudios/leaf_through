@@ -1,7 +1,7 @@
 defmodule LeafThrough.Mixfile do
   use Mix.Project
 
-  @version "0.0.1"
+  @version "0.0.2"
 
   def project do
     [
@@ -23,7 +23,7 @@ defmodule LeafThrough.Mixfile do
   defp deps do
     [
       {:ecto,   "~> 2.0"},
-      {:ex_doc, "~> 0.15.1"}
+      {:ex_doc, "~> 0.15.1", only: :docs}
     ]
   end
 
