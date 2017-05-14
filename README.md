@@ -4,7 +4,7 @@ Painless pagination for Ecto queries.
 
 ## Installation
 
-Leaf Through is [available in Hex](https://hex.pm/docs/publish) and can be installed
+Leaf Through is [available in Hex](https://hex.pm/packages/leaf_through) and can be installed
 by adding `leaf_through` to your list of dependencies in `mix.exs`:
 
 ```elixir
