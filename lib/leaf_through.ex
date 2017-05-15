@@ -1,5 +1,6 @@
 defmodule LeafThrough do
   import Ecto.Query, only: [limit: 2, offset: 2, exclude: 2, select: 2]
+  import LeafThrough.Calculate
 
   defmacro __using__(_opt) do
     quote do
@@ -35,11 +36,11 @@ defmodule LeafThrough do
   end
 
   defp set_limit(query) do
-    limit(query, 5)
+    limit(query, ^per_page())
   end
 
-  defp set_start(query, _page_number) do
-    offset(query, 0)
+  defp set_start(query, page_number) do
+    offset(query, ^starting_row(page_number))
   end
 
   defp retrieve(query, repo) do
