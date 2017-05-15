@@ -1,5 +1,7 @@
 # Leaf Through
 
+[![Hex.pm](https://img.shields.io/hexpm/v/leaf_through.svg)](https://hex.pm/packages/leaf_through)
+
 Painless pagination for Ecto queries.
 
 ## Installation
@@ -9,7 +11,7 @@ by adding `leaf_through` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:leaf_through, "~> 0.0.1"}]
+  [{:leaf_through, "~> x.y.z"}]
 end
 ```
 
