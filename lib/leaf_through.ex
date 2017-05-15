@@ -7,7 +7,7 @@ defmodule LeafThrough do
       @doc """
       LeafThrough is designed to be used by a repo module.
       """
-      @spec paginate(Ecto.Queryable.t, integer) :: map
+      @spec paginate(query :: Ecto.Query.t, integer) :: map
       def paginate(query, page_number) do
         LeafThrough.paginate(__MODULE__, query, page_number)
       end
