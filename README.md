@@ -1,6 +1,6 @@
 # Leaf Through
 
-[![Hex.pm](https://img.shields.io/hexpm/v/leaf_through.svg)](https://hex.pm/packages/leaf_through)
+[![Build Status](https://travis-ci.org/gentlelionstudios/leaf_through.svg?branch=master)](https://travis-ci.org/gentlelionstudios/leaf_through)  [![Hex.pm](https://img.shields.io/hexpm/v/leaf_through.svg)](https://hex.pm/packages/leaf_through)
 
 Painless pagination for Ecto queries.
 
