@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.3
+
+* Remove hard-coded page size and starting offset
+
 ## 0.0.2
 
 * Oops, set the env for ex_doc
