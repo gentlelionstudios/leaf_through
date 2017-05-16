@@ -17,4 +17,12 @@ defmodule LeafThrough.CalculateTest do
     assert Calculate.starting_row(2) == 5
     assert Calculate.starting_row(3) == 10
   end
+
+  test "calcuates the total pages" do
+    assert Calculate.leaves(1)  == 1
+    assert Calculate.leaves(4)  == 1
+    assert Calculate.leaves(19) == 4
+    assert Calculate.leaves(37) == 8
+    assert Calculate.leaves(50) == 10
+  end
 end
