@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4
+
+* Modify the map that is returned by paginate()
+
 ## 0.0.3
 
 * Remove hard-coded page size and starting offset
