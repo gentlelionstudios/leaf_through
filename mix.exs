@@ -12,7 +12,9 @@ defmodule LeafThrough.Mixfile do
       start_permanent: Mix.env == :prod,
       deps:            deps(),
       description:     description(),
-      package:         package()
+      package:         package(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
     ]
   end
 
@@ -23,7 +25,8 @@ defmodule LeafThrough.Mixfile do
   defp deps do
     [
       {:ecto,   "~> 2.0"},
-      {:ex_doc, "~> 0.15.1", only: :docs}
+      {:ex_doc, "~> 0.15.1", only: :docs},
+      {:excoveralls, "~> 0.6.3", only: :test}
     ]
   end
 
