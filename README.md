@@ -23,11 +23,27 @@ defmodule YourApp.Repo do
 end
 ```
 
+If you want to define the per page size (default is 10), add the following to your config:
+```elixir
+config :leaf_through,
+  per_page: 5
+```
+
 ## Usage
 
 Let's assume you've created a `User` schema which has a `first_name`, `last_name`, `username`, and an `email_address`.  Here's how to get the first page of results that are sorted by the user's last name:
 ```elixir
-User
-|> order_by(desc: :last_name)
-|> paginate(1)
+@users = User
+         |> order_by(desc: :last_name)
+         |> paginate(1)
 ```
+
+Here's how to add pagination links to one of your Phoenix templates:
+```elixir
+# In the template's view add
+import LeafThrough.Html
+
+# In the template file add
+<%= raw(leaf_through(@users)) %>
+```
+
