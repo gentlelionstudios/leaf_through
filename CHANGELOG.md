@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5
+
+* Generate basic paging links in HTML
+
 ## 0.0.4
 
 * Modify the map that is returned by paginate()
