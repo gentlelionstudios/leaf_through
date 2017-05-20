@@ -37,10 +37,10 @@ defmodule LeafThrough do
     total_entries = total_entries(repo, query) || 0
     pages         = pages(total_entries)
     %{
-      entries:       entries, 
-      total_entries: total_entries,
-      page:          page_number, 
-      pages:         pages
+      entries: entries, 
+      total_entries: total_entries, 
+      page: page_number, 
+      pages: pages
     }
   end
 
