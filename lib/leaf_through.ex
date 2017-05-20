@@ -1,4 +1,8 @@
 defmodule LeafThrough do
+  @moduledoc """
+  Provides Ecto pagination functions.
+  """
+
   import Ecto.Query, only: [limit: 2, offset: 2, exclude: 2, select: 2]
   import LeafThrough.Calculate
 

@@ -1,4 +1,11 @@
 defmodule LeafThrough.Html do
+  @moduledoc """
+  Provides functions that generate HTML pagination links.
+  """
+
+  @doc """
+  Generate the paging links given the pagination map.
+  """
   def leaf_through(map) do
     start_list() <> page_links(map) <> end_list()
   end
