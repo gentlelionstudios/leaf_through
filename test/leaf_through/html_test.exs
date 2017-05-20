@@ -26,12 +26,12 @@ defmodule LeafThrough.HtmlTest do
   end
 
   defp map_with_no_entries do
-    %{total_entries: 0, folio: 1, leaves: 1}
+    %{total_entries: 0, page: 1, leaves: 1}
   end
 
   def map_with_entries(total, current_page) do
     %{total_entries: total, 
-      folio: current_page, 
+      page: current_page, 
       leaves: LeafThrough.Calculate.leaves(total)}
   end
 end
