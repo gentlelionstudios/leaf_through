@@ -15,11 +15,11 @@ defmodule LeafThrough do
 
         * page:          requested page
 
-        * leaves:        total pages
+        * pages:         total pages
 
       ## Example map
       
-      %{ entries: [...], total_entries: 14, page: 2, leaves: 3 }
+      %{ entries: [...], total_entries: 14, page: 2, pages: 3 }
       """
       @spec paginate(query :: Ecto.Query.t, integer) :: map
       def paginate(query, page) do
@@ -31,12 +31,12 @@ defmodule LeafThrough do
   def paginate(repo, query, page_number) do
     entries       = entries(repo, query, page_number)
     total_entries = total_entries(repo, query) || 0
-    leaves        = leaves(total_entries)
+    pages         = pages(total_entries)
     %{
       entries:       entries, 
       total_entries: total_entries,
       page:          page_number, 
-      leaves:        leaves
+      pages:         pages
     }
   end
 

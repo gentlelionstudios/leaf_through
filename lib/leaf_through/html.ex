@@ -6,7 +6,7 @@ defmodule LeafThrough.Html do
   defp start_list, do: "<ol class=\"paging\">\n"
 
   defp page_links(map) do
-    Enum.reduce(map.leaves..1, "", fn(n, acc) -> 
+    Enum.reduce(map.pages..1, "", fn(n, acc) -> 
       if map.page == n do
         "  <li>#{n}</li>\n" <> acc 
       else

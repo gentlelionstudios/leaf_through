@@ -9,7 +9,7 @@ defmodule LeafThrough.Calculate do
     (page - 1) * per_page()
   end
 
-  def leaves(total_entries) do
+  def pages(total_entries) do
     (total_entries / per_page())
     |> Float.ceil()
     |> Kernel.trunc()
