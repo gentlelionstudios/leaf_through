@@ -23,8 +23,8 @@ defmodule LeafThrough.Calculate do
   @doc """
   Calculate the total number of pages based on the per_page size and entries count.
   """
-  def pages(total_entries) do
-    (total_entries / per_page())
+  def pages(total_count) do
+    (total_count / per_page())
     |> Float.ceil()
     |> Kernel.trunc()
   end

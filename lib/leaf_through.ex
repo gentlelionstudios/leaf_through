@@ -13,17 +13,17 @@ defmodule LeafThrough do
 
       The map consists of the following metadata:
 
-        * entries:       query results for the given page
+        * entries:     query results for the given page
 
-        * total_entries: count of query results for all pages
+        * total_count: count of query results for all pages
 
-        * page:          requested page
+        * page:        requested page
 
-        * pages:         total pages
+        * pages:       total pages
 
       ## Example map
       
-      %{ entries: [...], total_entries: 14, page: 2, pages: 3 }
+      %{ entries: [...], total_count: 14, page: 2, pages: 3 }
       """
       @spec paginate(query :: Ecto.Query.t, integer) :: map
       def paginate(query, page) do
@@ -33,12 +33,12 @@ defmodule LeafThrough do
   end
 
   def paginate(repo, query, page_number) do
-    entries       = entries(repo, query, page_number)
-    total_entries = total_entries(repo, query) || 0
-    pages         = pages(total_entries)
+    entries     = entries(repo, query, page_number)
+    total_count = total_count(repo, query) || 0
+    pages       = pages(total_count)
     %{
       entries: entries, 
-      total_entries: total_entries, 
+      total_count: total_count, 
       page: page_number, 
       pages: pages
     }
@@ -51,7 +51,7 @@ defmodule LeafThrough do
     |> retrieve(repo)
   end
 
-  defp total_entries(repo, query) do
+  defp total_count(repo, query) do
     query
     |> reset_query()
     |> count(repo)
