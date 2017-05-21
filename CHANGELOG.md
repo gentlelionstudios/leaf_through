@@ -2,7 +2,7 @@
 
 ## 0.1.0
 
-* Use simplier, clearer names for the key in the pagination map
+* Use simpler, clearer names for the keys in the pagination map
 
 ## 0.0.5
 
