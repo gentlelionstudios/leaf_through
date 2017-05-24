@@ -2,11 +2,11 @@ defmodule LeafThrough.Calculate do
   @moduledoc """
   Provides calculation functions.
   """
-  
+
   @default_per_page 10
 
   @doc """
-  Returns the per_page configuration value, otherwise returns the default 
+  Returns the per_page configuration value, otherwise returns the default
   value `#{@default_per_page}`.
   """
   def per_page do

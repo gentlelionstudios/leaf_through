@@ -31,8 +31,8 @@ defmodule LeafThrough.HtmlTest do
 
   def map_with_entries(total, current_page) do
     %{
-      total_count: total, 
-      page: current_page, 
+      total_count: total,
+      page: current_page,
       pages: LeafThrough.Calculate.pages(total)
     }
   end

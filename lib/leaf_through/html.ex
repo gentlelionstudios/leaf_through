@@ -13,11 +13,11 @@ defmodule LeafThrough.Html do
   defp start_list, do: "<ol class=\"paging\">\n"
 
   defp page_links(map) do
-    Enum.reduce(1..map.pages, "", fn(p, acc) -> 
+    Enum.reduce(1..map.pages, "", fn(p, acc) ->
       acc <> if map.page == p, do: no_link(p), else: page_link(p)
     end)
   end
-  defp no_link(page), do: "  <li>#{page}</li>\n" 
+  defp no_link(page), do: "  <li>#{page}</li>\n"
   defp page_link(page), do: "  <li><a href=\"?page=#{page}\">#{page}</a></li>\n"
 
   defp end_list, do: "</ol>\n"
