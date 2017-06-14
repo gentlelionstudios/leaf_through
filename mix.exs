@@ -10,6 +10,7 @@ defmodule LeafThrough.Mixfile do
       elixir:            "~> 1.3",
       build_embedded:    Mix.env == :prod,
       start_permanent:   Mix.env == :prod,
+      elixirc_paths:     elixirc_paths(Mix.env),
       deps:              deps(),
       description:       description(),
       package:           package(),
@@ -18,15 +19,24 @@ defmodule LeafThrough.Mixfile do
     ]
   end
 
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
+
   def application do
-    []
+    [applications: applications(Mix.env)]
   end
+
+  defp applications(:test), do: [:postgrex, :ex_machina] ++ applications(:dev)
+  defp applications(:dev),  do: [:logger]
+  defp applications(_all),  do: []
 
   defp deps do
     [
       {:ecto,        "~> 2.0"},
-      {:ex_doc,      "~> 0.15", only: :docs},
-      {:excoveralls, "~> 0.6", only: :test}
+      {:ex_doc,      "~> 0.15",  only: :docs},
+      {:excoveralls, "~> 0.6",   only: :test},
+      {:ex_machina,  "~> 2.0",   only: :test},
+      {:postgrex,    ">= 0.0.0", only: :test}
     ]
   end
 
