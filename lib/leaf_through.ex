@@ -33,28 +33,33 @@ defmodule LeafThrough do
   end
 
   def paginate(repo, query, page_number) do
-    entries     = entries(repo, query, page_number)
-    total_count = total_count(repo, query) || 0
-    pages       = pages(total_count)
-    %{
-      entries: entries,
-      total_count: total_count,
-      page: page_number,
-      pages: pages
-    }
+    limit_to_page(query, page_number)
+    |> execute(repo)
+    |> calculate_total(query, repo)
+    |> add_pages(page_number)
   end
 
-  defp entries(repo, query, page_number) do
+  defp limit_to_page(query, page_number) do
     query
     |> set_limit()
     |> set_start(page_number)
-    |> retrieve(repo)
   end
 
-  defp total_count(repo, query) do
-    query
-    |> reset_query()
-    |> count(repo)
+  defp execute(query, repo) do
+    %{entries: repo.all(query)}
+  end
+
+  defp calculate_total(map, query, repo) do
+    total = query
+            |> reset_query()
+            |> count(repo)
+    Map.put(map, :total_count, total)
+  end
+
+  defp add_pages(map, page_number) do
+    map
+    |> Map.put(:page, page_number)
+    |> Map.put(:pages, pages(map.total_count))
   end
 
   defp set_limit(query) do
@@ -63,10 +68,6 @@ defmodule LeafThrough do
 
   defp set_start(query, page_number) do
     offset(query, ^starting_row(page_number))
-  end
-
-  defp retrieve(query, repo) do
-    repo.all(query)
   end
 
   defp reset_query(query) do
