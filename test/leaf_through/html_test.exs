@@ -5,11 +5,7 @@ defmodule LeafThrough.HtmlTest do
   test "generates paging links for zero entries" do
     map = map_with_no_entries()
 
-    assert Html.leaf_through(map) == """
-    <ol class="paging">
-      <li>1</li>
-    </ol>
-    """
+    assert Html.leaf_through(map) == ""
   end
 
   test "generates paging links for multiple pages" do
@@ -26,7 +22,7 @@ defmodule LeafThrough.HtmlTest do
   end
 
   defp map_with_no_entries do
-    %{total_count: 0, page: 1, pages: 1}
+    %{total_count: 0, page: 0, pages: 0}
   end
 
   def map_with_entries(total, current_page) do

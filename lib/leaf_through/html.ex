@@ -7,7 +7,11 @@ defmodule LeafThrough.Html do
   Generate the paging links given the pagination map.
   """
   def leaf_through(map) do
-    start_list() <> page_links(map) <> end_list()
+    if map.total_count > 0 do
+      start_list() <> page_links(map) <> end_list()
+    else
+      ""
+    end
   end
 
   defp start_list, do: "<ol class=\"paging\">\n"
