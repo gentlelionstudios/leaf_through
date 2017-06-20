@@ -13,3 +13,5 @@ config :leaf_through, Test.Repo,
   database: "leaf_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :logger, level: :warn

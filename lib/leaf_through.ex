@@ -56,10 +56,13 @@ defmodule LeafThrough do
     Map.put(map, :total_count, total)
   end
 
-  defp add_pages(map, page_number) do
+  defp add_pages(%{total_count: total} = map, page_number) do
+    page  = if total > 0, do: page_number, else: 0
+    pages = if total > 0, do: pages(total), else: 0
+
     map
-    |> Map.put(:page, page_number)
-    |> Map.put(:pages, pages(map.total_count))
+    |> Map.put(:page, page)
+    |> Map.put(:pages, pages)
   end
 
   defp set_limit(query) do
