@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0
+
+* Sets the current page to 0 with no results
+* Only renders paging links with results
+
 ## 0.1.0
 
 * Use simpler, clearer names for the keys in the pagination map
