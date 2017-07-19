@@ -1,8 +1,4 @@
 language: elixir
-elixir:
-  - 1.4.5
-otp_release:
-  - 20.0
 
 matrix:
   include:
@@ -10,6 +6,8 @@ matrix:
       otp_release: 18.3
     - elixir: 1.4.4
       otp_release: 19.3
+    - elixir: 1.4.5
+      otp_release: 20.0
 
 sudo: false
 addons:
