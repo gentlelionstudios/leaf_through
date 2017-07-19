@@ -14,7 +14,6 @@ defmodule Test.User do
   end
 
   def changeset(user, params \\ %{}) do
-    user
-    |> cast(params, [:first_name, :last_name, :username, :email_address])
+    cast(user, params, [:first_name, :last_name, :username, :email_address])
   end
 end

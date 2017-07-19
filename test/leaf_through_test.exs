@@ -7,11 +7,12 @@ defmodule LeafThroughTest do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Test.Repo)
 
     users = for _ <- 1..7, do: insert(:user)
-    { :ok, users: users }
+    {:ok, users: users}
   end
 
   test "should return first page of users", %{users: users} do
-    expected_users = Enum.sort_by(users, fn(u) -> u.username end) |> Enum.take(5)
+    sorted_users = Enum.sort_by(users, fn(u) -> u.username end)
+    expected_users = Enum.take(sorted_users, 5)
     map = LeafThrough.paginate(Test.Repo, query(), 1)
     assert expected_users == map.entries
   end
@@ -44,8 +45,7 @@ defmodule LeafThroughTest do
   end
 
   defp query do
-    Test.User
-    |> order_by([u], u.username)
+    order_by(Test.User, [u], u.username)
   end
 
   defp no_results_query do

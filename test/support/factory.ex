@@ -1,4 +1,7 @@
 defmodule Test.Factory do
+  @moduledoc """
+  Factory for test objects
+  """
   use ExMachina.Ecto, repo: Test.Repo
 
   def user_factory do
@@ -6,7 +9,7 @@ defmodule Test.Factory do
     %Test.User{
       first_name: Faker.Name.first_name,
       last_name: Faker.Name.last_name,
-      username: username, 
+      username: username,
       email_address: "#{username}@example.com"
     }
   end
