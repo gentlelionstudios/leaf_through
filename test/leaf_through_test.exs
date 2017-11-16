@@ -1,56 +1,64 @@
 defmodule LeafThroughTest do
-  use ExUnit.Case
+  use Test.RepoCase, async: true
   import Test.Factory
   import Ecto.Query
 
-  setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Test.Repo)
-
+  defp insert_users(_context) do
     users = for _ <- 1..7, do: insert(:user)
     {:ok, users: users}
-  end
-
-  test "should return first page of users", %{users: users} do
-    sorted_users = Enum.sort_by(users, fn(u) -> u.username end)
-    expected_users = Enum.take(sorted_users, 5)
-    map = LeafThrough.paginate(Test.Repo, query(), 1)
-    assert expected_users == map.entries
-  end
-
-  test "should return the total count", %{users: users} do
-    map = LeafThrough.paginate(Test.Repo, query(), 1)
-    assert Enum.count(users) == map.total_count
-  end
-
-  test "should return the current page" do
-    map = LeafThrough.paginate(Test.Repo, query(), 1)
-    assert map.page == 1
-  end
-
-  test "should return the total pages" do
-    map = LeafThrough.paginate(Test.Repo, query(), 1)
-    assert map.pages == 2
-  end
-
-  test "should return no entries with no results" do
-    map = LeafThrough.paginate(Test.Repo, no_results_query(), 1)
-    assert Enum.empty?(map.entries)
-    assert map.total_count == 0
-  end
-
-  test "should not set the page information with no results" do
-    map = LeafThrough.paginate(Test.Repo, no_results_query(), 1)
-    assert map.page == 0
-    assert map.pages == 0
   end
 
   defp query do
     order_by(Test.User, [u], u.username)
   end
 
-  defp no_results_query do
-    Test.User
-    |> where([u], u.first_name == "12345")
-    |> order_by([u], u.username)
+  describe "with users in the database" do
+    setup [:insert_users]
+
+    test "returns the first page of users", %{users: users} do
+      first_five_users = users
+                         |> Enum.sort_by(fn(u) -> u.username end)
+                         |> Enum.take(5)
+
+      map = LeafThrough.paginate(Test.Repo, query(), 1)
+      assert map.entries == first_five_users
+    end
+
+    test "returns the total count" do
+      map = LeafThrough.paginate(Test.Repo, query(), 1)
+      assert map.total_count == 7
+    end
+
+    test "returns the current page" do
+      map = LeafThrough.paginate(Test.Repo, query(), 1)
+      assert map.page == 1
+    end
+
+    test "returns the total pages" do
+      map = LeafThrough.paginate(Test.Repo, query(), 1)
+      assert map.pages == 2
+    end
+  end
+
+  describe "with no users in the database" do
+    test "return no entries" do
+      map = LeafThrough.paginate(Test.Repo, query(), 1)
+      assert Enum.empty?(map.entries)
+    end
+
+    test "returns 0 for the total count" do
+      map = LeafThrough.paginate(Test.Repo, query(), 1)
+      assert map.total_count == 0
+    end
+
+    test "returns 0 for the current page" do
+      map = LeafThrough.paginate(Test.Repo, query(), 1)
+      assert map.page == 0
+    end
+
+    test "returns 0 for the total pages" do
+      map = LeafThrough.paginate(Test.Repo, query(), 1)
+      assert map.pages == 0
+    end
   end
 end
