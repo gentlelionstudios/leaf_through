@@ -7,11 +7,8 @@ config :leaf_through, ecto_repos: [Test.Repo]
 
 # configure test database
 config :leaf_through, Test.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "leaf_test",
-  hostname: "localhost",
+  adapter: Sqlite.Ecto2,
+  database: "db/test.db",
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :logger, level: :warn

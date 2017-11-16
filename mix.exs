@@ -26,18 +26,18 @@ defmodule LeafThrough.Mixfile do
     [applications: applications(Mix.env)]
   end
 
-  defp applications(:test), do: applications(:dev) ++ [:postgrex, :ex_machina, :faker]
+  defp applications(:test), do: applications(:dev) ++ [:sqlite_ecto2, :ecto, :ex_machina, :faker]
   defp applications(:dev),  do: [:logger]
   defp applications(_all),  do: []
 
   defp deps do
     [
-      {:ecto,        "~> 2.0"},
-      {:ex_doc,      "~> 0.15",  only: :docs},
-      {:excoveralls, "~> 0.6",   only: :test},
-      {:ex_machina,  "~> 2.0",   only: :test},
-      {:faker,       "~> 0.8",   only: :test},
-      {:postgrex,    ">= 0.0.0", only: :test}
+      {:ecto,         "~> 2.0"},
+      {:ex_doc,       "~> 0.15", only: :docs},
+      {:excoveralls,  "~> 0.6",  only: :test},
+      {:ex_machina,   "~> 2.0",  only: :test},
+      {:faker,        "~> 0.8",  only: :test},
+      {:sqlite_ecto2, "~> 2.2",  only: :test}
     ]
   end
 
