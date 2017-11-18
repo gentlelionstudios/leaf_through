@@ -15,15 +15,24 @@ def deps do
 end
 ```
 
+Configure the repo used by leaf_through:
+
+```elixir
+config :leaf_through,
+  repo: YourApp.Repo
+```
+
 Add LeafThrough to your `repo.ex`:
+
 ```elixir
 defmodule YourApp.Repo do
   use Ecto.Repo, otp_app: :your_app
-  use LeafThrough
+  import LeafThrough
 end
 ```
 
 If you want to define the per page size (default is 10), add the following to your config:
+
 ```elixir
 config :leaf_through,
   per_page: 5

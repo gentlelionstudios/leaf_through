@@ -1,6 +1,7 @@
 use Mix.Config
 
 config :leaf_through,
+  repo: Test.Repo,
   per_page: 5
 
 config :leaf_through, ecto_repos: [Test.Repo]

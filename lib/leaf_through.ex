@@ -6,38 +6,32 @@ defmodule LeafThrough do
   import Ecto.Query, only: [limit: 2, offset: 2, exclude: 2, select: 2]
   import LeafThrough.Calculate
 
-  defmacro __using__(_options) do
-    quote do
-      @doc """
-      Paginates an Ecto query and returns a `Map` of the results for the given page number.
+  @doc """
+  Paginates an Ecto query and returns a `Map` of the results for the given page number.
 
-      The map consists of the following metadata:
+  The map consists of the following metadata:
 
-        * entries:     query results for the given page
+  * entries:     query results for the given page
 
-        * total_count: count of query results for all pages
+  * total_count: count of query results for all pages
 
-        * page:        requested page
+  * page:        requested page
 
-        * pages:       total pages
+  * pages:       total pages
 
-      ## Example map
+  ## Example map
 
-      %{ entries: [...], total_count: 14, page: 2, pages: 3 }
-      """
-      @spec paginate(query :: Ecto.Query.t, integer) :: map
-      def paginate(query, page) do
-        LeafThrough.paginate(__MODULE__, query, page)
-      end
-    end
-  end
-
-  def paginate(repo, query, page_number) do
+  %{ entries: [...], total_count: 14, page: 2, pages: 3 }
+  """
+  @spec paginate(query :: Ecto.Query.t, integer) :: map
+  def paginate(query, page_number) do
     limit_to_page(query, page_number)
-    |> execute(repo)
-    |> calculate_total(query, repo)
+    |> execute(repo())
+    |> calculate_total(query, repo())
     |> add_pages(page_number)
   end
+
+  defp repo, do: Application.fetch_env!(:leaf_through, :repo)
 
   defp limit_to_page(query, page_number) do
     query
